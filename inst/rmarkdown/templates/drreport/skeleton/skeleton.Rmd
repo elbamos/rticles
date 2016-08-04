@@ -1,0 +1,112 @@
+---
+title: "Digital Reasoning Report"
+author:
+- email: your.name@digitalreasoning.com
+  name: Your Name, PhD
+date: "February 8, 2015"
+bibliography: "knitcitations.bib"
+classoption: oneside
+output: 
+  digitalreasoning::drreport:
+    toc: true
+    latex_engine: xelatex
+    toc_depth: 3
+    number_sections: true
+    keep_tex: true
+link-citations: yes
+---
+```{r setup,echo=FALSE,message=FALSE,cache=FALSE,include=TRUE}
+library(knitcitations)
+library(knitr)
+library(xtable)
+library(ggplot2)
+library(pander)
+library(magrittr)
+library(tidyr)
+library(dplyr)
+
+opts_knit$set(
+    echo = FALSE,
+    tidy = TRUE,
+    cache = FALSE
+)
+
+format <- opts_knit$get("rmarkdown.pandoc.to")
+
+if (format == "html") {
+  library(plotly)
+  opts_knit$set(
+    fig.margin=TRUE,
+    dev="svg"
+  )  
+} else {
+  opts_knit$set(
+    fig.margin=TRUE,
+    dev="tikz"
+  )
+}
+
+drplot <- function(...) {
+  plt <- eval(enquote(...))
+  if (format == "html") ggplotly(plt)
+  else plt
+}
+
+cite_options(
+             citation_format = "pandoc",
+						 style="citation"
+             )
+
+options(xtable.comment = FALSE)
+options(xtable.booktabs = TRUE)
+
+theme_set(
+  theme_bw() %+replace%
+  theme(
+    legend.key.size = unit(4, "mm"), 
+    legend.title = element_text(size = rel(0.8),
+                              face = "bold"),
+    legend.margin = unit(0, "cm"),
+    legend.position = "bottom",
+    legend.key.size = unit(0.5, "lines"),
+    legend.text=element_text(size = unit(8, "points")), 
+    axis.title.y = element_text(angle = 90),
+    axis.text = element_text(size = rel(0.7)),
+    plot.margin = unit(c(0, 0.5, 1, 0), "lines"), 
+    axis.title = element_text(size = rel(0.8),
+                              face = "bold"),
+    title = element_text(size = rel(0.9))
+  ) 
+)
+
+drblue <- "#006699"
+drbrown <- "#CC9934"
+drgrey <- "#7A7A7A"
+drgreen <- "#669933"
+drpallette <- c(drblue, drbrown, drgrey, drgreen)
+
+update_geom_defaults("point", list(colour = drbrown))
+update_geom_defaults("line", list(colour = drbrown))
+
+colors_divergent_discrete <- function(x) 
+  grDevices::colorRampPalette(RColorBrewer::brewer.pal(x, "Spectral"))
+```
+
+# Executive Summary 
+
+Cancer diagnoses contained in pathology reports are used for both patient care and downstream reporting.  Automation of this process reduces duplicate workload between nurse navigators and registrars and allows them to spend the majority of their time with patients or reporting, respectively.  Additionally, it helps address the backlog of work for registrars, and prevents patient churn by allowing nurse navigators to contact their patients more quickly and facilitate the most blah blah blah
+
+\clearpage
+
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
+\section*{Bibliography}
+ 
+`r write.bibtex(file="knitcitations.bib", append=FALSE,biblatex=TRUE)`
+
+Use the `\vspace` command to insert blank vertical spaces, like the one separating this line from the bibliography. 
+
+\vspace{10mm}
+
+
+

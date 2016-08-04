@@ -1,11 +1,31 @@
-Package: rticles
+Package: digitalreasoning
 Type: Package
 Title: What the package does (short line)
-Version: 1.0
-Date: 2014-03-14
+Version: 0.1
+Date: 2016-08-01
 Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Imports:
-    rmarkdown
+    rmarkdown,
+    knitcitations,
+    knitr,
+    xtable,
+    ggplot2,
+    pander,
+    magrittr,
+    tidyr,
+    dplyr,
+    stringr,
+    lubridate,
+    RColorBrewer
+Suggests:
+    ggplot2,
+    knitcitations,
+    papeR,
+    knitr,
+    xtable,
+    RColorBrewer,
+    pander
+RoxygenNote: 5.0.1
